@@ -1,0 +1,11 @@
+[package]
+name = "espresso-cli"
+version = "0.0.0"
+authors = ["Jacob Emil Ulvedal Rosborg <jacob@rosborg.dk>"]
+edition = "2018"
+
+[dependencies]
+zip = "0.5"
+ron = "0.5"
+clap-v3 = "3.0"
+espresso = { path = ".." }
