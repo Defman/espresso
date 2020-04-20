@@ -1,6 +1,5 @@
 use bytes::buf::{Buf, BufMut};
 use thiserror::Error;
-use std::convert::TryInto;
 
 #[derive(Error, Debug)]
 pub enum TryError {
@@ -100,6 +99,7 @@ pub trait Offset {
 }
 
 #[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[serde(transparent)]
 pub struct PrefixedVec<P, T, O>
 where
     P: TryReadFrom + Into<u64>,
@@ -143,4 +143,15 @@ where
             data,
         })
     }
+}
+
+#[derive(Debug, PartialEq)]
+pub struct ZeroOffset;
+impl Offset for ZeroOffset {
+    const VALUE: usize = 0;
+}
+#[derive(Debug, PartialEq)]
+pub struct OneOffset;
+impl Offset for OneOffset {
+    const VALUE: usize = 1;
 }
